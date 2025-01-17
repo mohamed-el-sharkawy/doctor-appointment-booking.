@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Event } from './app.service';
 import { DoctorAvailabilityModule } from './doctor-availability/doctor-availability.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SlotModel } from './doctor-availability/models/slot.model';
@@ -29,7 +28,7 @@ import { Dialect } from 'sequelize';
     }),
     DoctorAvailabilityModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [Event],
 })
 export class AppModule {}

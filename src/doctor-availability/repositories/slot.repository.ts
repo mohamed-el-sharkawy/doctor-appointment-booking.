@@ -47,4 +47,12 @@ export class SlotRepository implements ISlotRepository {
       },
     });
   }
+
+  async setSlotAsReserved(id: string): Promise<boolean> {
+    const affectedCount = await this.slotModel.update(
+      { isReserved: true },
+      { where: { id } },
+    );
+    return affectedCount[0] >= 1;
+  }
 }

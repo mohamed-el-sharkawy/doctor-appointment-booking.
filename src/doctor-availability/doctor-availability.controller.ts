@@ -12,6 +12,7 @@ import { DoctorAvailabilityService } from './doctor-availability.service';
 import { SlotDto } from './dto/slot.dto';
 import { Slot } from './interfaces/slot.interface';
 import { validate as uuidValidate, version as uuidVersion } from 'uuid';
+import { eventsEnum } from 'src/types';
 
 @Controller('slots')
 export class DoctorAvailabilityController {
@@ -98,5 +99,16 @@ export class DoctorAvailabilityController {
   @Delete(':id')
   deleteSlot(@Param('id') id: string): Promise<boolean> {
     return this.doctorAvailabilityService.delete(id);
+  }
+
+  @Post('events')
+  async listen(@Body() body: { event: string; data: any }): Promise<boolean> {
+    const { event, data } = body;
+    if (event === eventsEnum.AppointmentBooked) {
+      return this.doctorAvailabilityService.handleAppointmentBooked(
+        data.slotId,
+      );
+    }
+    return true;
   }
 }

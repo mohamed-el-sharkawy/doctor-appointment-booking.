@@ -19,7 +19,7 @@ export class DoctorAvailabilityService {
   async create(slot: Slot): Promise<Slot> {
     const slots = await this.getByTime(slot.time);
     if (slots.length > 0) {
-      throw new BadRequestException('Slot already exists');
+      throw new BadRequestException('Slot time is already occupied');
     }
     return this.slotRepository.create(slot);
   }
@@ -39,5 +39,9 @@ export class DoctorAvailabilityService {
 
   async getByTime(time: Date): Promise<Slot[]> {
     return this.slotRepository.getByTime(time);
+  }
+
+  async handleAppointmentBooked(slotId: string): Promise<boolean> {
+    return this.slotRepository.setSlotAsReserved(slotId);
   }
 }

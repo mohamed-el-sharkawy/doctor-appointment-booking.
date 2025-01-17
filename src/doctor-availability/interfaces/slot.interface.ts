@@ -16,4 +16,5 @@ export interface ISlotRepository {
   update(id: string, slot: Slot): Promise<Slot[]>;
   delete(id: string): Promise<boolean>;
   getByTime(time: Date): Promise<Slot[]>;
+  setSlotAsReserved(id: string): Promise<boolean>;
 }
