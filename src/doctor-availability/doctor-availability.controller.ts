@@ -61,6 +61,11 @@ export class DoctorAvailabilityController {
     return this.doctorAvailabilityService.findAll();
   }
 
+  @Get('available-slots')
+  availableSlots(): Promise<Slot[]> {
+    return this.doctorAvailabilityService.getAvailableSlots();
+  }
+
   @Get(':id')
   slot(@Param('id') id: string): Promise<Slot> {
     return this.doctorAvailabilityService.findOne(id);

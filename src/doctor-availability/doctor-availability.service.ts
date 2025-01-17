@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
-import { Slot, ISlotRepository } from './interfaces/slot.interface';
-
+import { Slot } from './interfaces/slot.interface';
+import { ISlotRepository } from './interfaces/ISlotRepository';
 @Injectable()
 export class DoctorAvailabilityService {
   constructor(
@@ -43,5 +43,9 @@ export class DoctorAvailabilityService {
 
   async handleAppointmentBooked(slotId: string): Promise<boolean> {
     return this.slotRepository.setSlotAsReserved(slotId);
+  }
+
+  async getAvailableSlots(): Promise<Slot[]> {
+    return this.slotRepository.getAvailableSlots();
   }
 }

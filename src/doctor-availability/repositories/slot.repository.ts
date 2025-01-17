@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { SlotModel } from '../models/slot.model';
 import { Slot } from '../interfaces/slot.interface';
-import { ISlotRepository } from '../interfaces/slot.interface';
+import { ISlotRepository } from '../interfaces/ISlotRepository';
 import { Op } from 'sequelize';
 
 @Injectable()
@@ -54,5 +54,9 @@ export class SlotRepository implements ISlotRepository {
       { where: { id } },
     );
     return affectedCount[0] >= 1;
+  }
+
+  async getAvailableSlots(): Promise<Slot[]> {
+    return this.slotModel.findAll({ where: { isReserved: false } });
   }
 }
