@@ -8,5 +8,5 @@ export interface AvailableSlotDto {
   doctorId: string; 
   doctorName: string;
   isReserved: boolean;
-  cost: number; // Decimal
+  cost: number;
 }

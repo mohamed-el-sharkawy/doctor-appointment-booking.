@@ -1,11 +1,11 @@
 export interface BookAppointmentInterface {
   slotId: string; 
   patientId: string; 
-  patientName: string; // string
-  reservedAt: Date; // Date
+  patientName: string;
+  reservedAt: Date; 
 }
 
 export interface BookAppointmentOutput {
   appointmentId: string; 
-  message: string; // Confirmation message
+  message: string; 
 }
