@@ -6,6 +6,7 @@ import { SlotModel } from './doctor-availability/models/slot.model';
 import * as fs from 'fs';
 import { ConfigModule } from '@nestjs/config';
 import { Dialect } from 'sequelize';
+import { AppointmentManagementModule } from './appointment-management/appointment-management';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { Dialect } from 'sequelize';
       synchronize: true,
     }),
     DoctorAvailabilityModule,
+    AppointmentManagementModule,
   ],
   controllers: [],
   providers: [Event],
