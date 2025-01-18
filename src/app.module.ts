@@ -7,7 +7,8 @@ import * as fs from 'fs';
 import { ConfigModule } from '@nestjs/config';
 import { Dialect } from 'sequelize';
 import { AppointmentManagementModule } from './appointment-management/appointment-management';
-
+import { AppointmentBookingModule } from './appointment-booking/appointment-booking.module';
+import { AppointmentModel } from './appointment-booking/infrastructure/models/appointment.model';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -18,7 +19,7 @@ import { AppointmentManagementModule } from './appointment-management/appointmen
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      models: [SlotModel],
+      models: [SlotModel,AppointmentModel],
       dialectOptions: {
         ssl: {
           ca: fs.readFileSync(process.env.DB_SSL_CA),
@@ -29,6 +30,7 @@ import { AppointmentManagementModule } from './appointment-management/appointmen
     }),
     DoctorAvailabilityModule,
     AppointmentManagementModule,
+    AppointmentBookingModule
   ],
   controllers: [],
   providers: [Event],
